@@ -1,0 +1,46 @@
+.DS_Store
+.vscode
+
+# OS
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.lnk
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+uv.lock
+pip-wheel-metadata/
+.ipynb_checkpoints/
+
+# Test / type caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+
+# Logs
+*.log
