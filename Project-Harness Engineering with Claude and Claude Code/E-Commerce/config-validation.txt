@@ -1,0 +1,106 @@
+﻿Folder PATH listing for volume OS
+Volume serial number is 9846-3247
+C:\USERS\PHILI\ONEDRIVE\DOCUMENTOS\UDACITY PROJECT\CLAUDE\MODULE 1\UDACITY_CLAUDE_MODULE-1\CONFIGURE CLAUDE CODE FOR A MULTI-SURFACE MONOREPO TEAM\04-PLAN-MODE-AND-EXPLORE-DECISION-DOC\STARTER\.CLAUDE
++---commands
+ª       review.md
+ª       
++---rules
+ª       api.md
+ª       react.md
+ª       tests.md
+ª       
++---skills
+ª   +---deploy-check
+ª           SKILL.md
+ª           
++---standards
+        api.md
+        database.md
+        frontend.md
+        testing.md
+        
+==> .claude\rules\api.md <==
+---
+description: Conventions for Node.js API handlers
+paths:
+  - "src/api/**/*"
+---
+
+# API handler rules
+
+Loads when editing any file under `src/api/`.
+
+## Handler signature
+
+- Every handler is `async function handle(req: ApiRequest<TBody>): Promise<ApiResponse<TOut>>`. The framework adapter does the actual response write â€” handlers never call `res.send`.
+- The `TBody` and `TOut` type parameters come from the schemas in `src/api/_schemas/`. Inline anonymous types here are not allowed.
+
+
+==> .claude\rules\react.md <==
+---
+description: Conventions for React components and pages
+paths:
+  - "src/components/**/*"
+  - "src/pages/**/*"
+---
+
+# React component & page rules
+
+Loads when editing any file under `src/components/` or `src/pages/`.
+
+## Imports
+
+- Import React types as `import type { ... } from "react"` â€” never mixed with value imports. This keeps the dead-code-elimination boundary obvious.
+- App-internal imports use the `@/` alias (resolved by Vite). Relative `../../../foo` paths are a code smell â€” promote the shared module instead.
+
+==> .claude\rules\tests.md <==
+---
+description: Conventions for test files (co-located *.test.ts and *.test.tsx)
+paths:
+  - "**/*.test.tsx"
+  - "**/*.test.ts"
+---
+
+# Test file rules
+
+Loads when editing any co-located test file anywhere in the tree. Applies on top of the React or API rules when the file under test sits in those directories.
+
+## Structure
+
+- One top-level `describe` per file, named after the unit under test (`describe("Cart", () => { ... })`).
+- Group related cases with nested `describe`. Avoid deeper than 2 nesting levels.
+
+==> .claude\commands\review.md <==
+---
+description: Run the e-commerce team's PR review checklist against a pull request or local diff
+argument-hint: <pr-number | "HEAD~1..HEAD" | path/to/file>
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash(git diff:*)
+  - Bash(git log:*)
+  - Bash(git show:*)
+  - Bash(git status:*)
+  - Bash(gh pr diff:*)
+  - Bash(gh pr view:*)
+  - Bash(gh pr checks:*)
+---
+
+==> .claude\skills\deploy-check\SKILL.md <==
+---
+name: deploy-check
+description: Run read-only pre-deployment validation in a forked sub-agent and report a single pass/fail summary back to the main session
+context: fork
+argument-hint: "[target-branch] (defaults to main)"
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash(git status:*)
+  - Bash(git diff:*)
+  - Bash(git log:*)
+  - Bash(git rev-parse:*)
+  - Bash(git ls-files:*)
+  - Bash(gh pr view:*)
+
